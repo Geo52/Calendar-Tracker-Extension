@@ -1,0 +1,11 @@
+{
+    "name": "Calendar Tracker",
+    "version": "1.0.0",
+    "description": "This is an extension to find out if our time invested reflects to our events done",
+    "manifest_version": 3,
+    "author": "2 b named",
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "Calendar Tracker"
+        }
+}
