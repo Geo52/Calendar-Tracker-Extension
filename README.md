@@ -1,2 +1,2 @@
 # Calendar-Tracker-Extension
-Tracks time spent on a specific calendar for google calendar.
+Tracks time spent on a specific calendar for google calend
