@@ -72,7 +72,7 @@ async function authorize() {
 async function listEvents(auth) {
   const calendar = google.calendar({ version: "v3", auth });
   const res = await calendar.events.list({
-    calendarId: "primary",
+    calendarId: "4d5c6c38399274609c839e9bd924e0ae99d2905ab2c1b4db51eac8bbc152b8e9@group.calendar.google.com",
     timeMin: new Date().toISOString(),
     maxResults: 10,
     singleEvents: true,
@@ -85,8 +85,23 @@ async function listEvents(auth) {
   }
   console.log("Upcoming 10 events:");
   events.map((event, i) => {
-    const start = event.start.dateTime || event.start.date;
-    console.log(`${start} - ${event.summary}`);
+    const start = new Date(event.start.dateTime || event.start.date);
+    const end = new Date(event.end.dateTime || event.end.date);
+
+    // Calculate the difference in milliseconds
+    const diffMs = end - start;
+
+    // Convert milliseconds to hours, minutes, and seconds
+    const hours = Math.floor(diffMs / (1000 * 60 * 60));
+    const minutes = Math.floor((diffMs / (1000 * 60)) % 60);
+    const seconds = Math.floor((diffMs / 1000) % 60);
+
+    // Format the duration as a string HH:mm:ss
+    const formattedDuration = [hours, minutes, seconds]
+      .map((num) => String(num).padStart(2, "0"))
+      .join(":");
+
+    console.log(`Duration of "${event.summary}": ${formattedDuration}`);
   });
 }
 
